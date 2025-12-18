@@ -6,11 +6,26 @@
 \usepackage[spanish]{babel}
 \usepackage{pdflscape}
 \usepackage{graphicx}
+\usepackage{graphicx}
+\setkeys{Gin}{width=\linewidth,keepaspectratio}
 \usepackage{geometry}
 \usepackage{setspace}
 \usepackage{fancyhdr}
 \usepackage{listings}
 \usepackage{xcolor}
+\lstset{
+  backgroundcolor=\color{gray!10},
+  basicstyle=\ttfamily\small,
+  frame=single,
+  rulecolor=\color{gray!60},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{green!50!black},
+  stringstyle=\color{red!60!black},
+  breaklines=true,
+  tabsize=2
+}
 \usepackage{float}
 \usepackage{caption}
 \usepackage{hyperref}
@@ -39,7 +54,7 @@
         fontsize=\footnotesize, % Cambiado de \small a \footnotesize
         breaklines=true,
         linenos=true,
-        baselinestretch=0.9, % REDUCIDO de 1.0 a 0.8
+        baselinestretch=1.1, % REDUCIDO de 1.0 a 0.8
         tabsize=4,
         frame=lines,
         framesep=2mm
@@ -65,7 +80,7 @@
         fontsize=\footnotesize,
         breaklines=true,
         linenos=true,
-        baselinestretch=0.9,
+        baselinestretch=1.1,
         tabsize=4,
         frame=lines,
         framesep=2mm
@@ -866,3 +881,4 @@ En conclusión, el proyecto representa una aplicación completa de los principio
 
 
 \end{document}
+
