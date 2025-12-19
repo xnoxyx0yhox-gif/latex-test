@@ -387,74 +387,133 @@ El esquema de base de datos se encuentra en \textbf{Tercera Forma Normal (3FN)}:
 
 Se han definido índices sobre las columnas más consultadas (\texttt{email} en USUARIOS, \texttt{id\_producto} en INVENTARIO) para optimizar el rendimiento de las búsquedas frecuentes.
 
-\subsection{Arquitectura del Sistema: Patrón MVC}
+\\subsection{Arquitectura del Sistema: Patrón MVC}
 
 El sistema implementa el patrón de arquitectura Modelo-Vista-Controlador (MVC), que organiza la aplicación en tres capas independientes e interconectadas. Esta separación de responsabilidades facilita el mantenimiento, la escalabilidad y permite que diferentes componentes evolucionen de forma independiente sin afectar al resto del sistema.
 
+\subsubsection{Diseño Conceptual de la Arquitectura}
+
+La arquitectura MVC se implementa mediante cuatro capas principales que se comunican siguiendo un flujo unidireccional:
+
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.9\textwidth]{img/arquitectura-mvc.png}
+\includegraphics[width=1.0\textwidth]{img/arquitectura-mvc.png}
 \caption{Arquitectura MVC del Sistema de Gestión de Cafetín}
 \label{fig:arquitectura-mvc}
 \end{figure}
 
-\subsubsection{Capa de Modelo}
-
-La capa de modelo encapsula toda la lógica de negocio y se subdivide en dos componentes principales:
-
-\begin{enumerate}
-    \item \textbf{Clases del Dominio:} Representan las entidades del negocio con sus atributos y comportamientos. Incluyen:
-    \begin{itemize}
-        \item \texttt{Usuario}, \texttt{Administrador}, \texttt{Cajero}, \texttt{Cliente} - Jerarquía de usuarios
-        \item \texttt{Producto} - Artículos del cafetín con control de stock
-        \item \texttt{Pedido}, \texttt{DetallePedido} - Gestión de órdenes
-        \item \texttt{Inventario} - Control de niveles de stock
-    \end{itemize}
+\begin{itemize}
+    \item \textbf{Capa de Presentación (Vista):} Responsable de la interfaz de usuario y presentación de datos. Recibe las peticiones del usuario y muestra los resultados.
     
-    \item \textbf{Capa DAO (Data Access Object):} Abstrae el acceso a la base de datos:
-    \begin{itemize}
-        \item \texttt{ConexionBD} - Gestión de conexiones (patrón Singleton)
-        \item \texttt{UsuarioDAO}, \texttt{ProductoDAO}, \texttt{PedidoDAO} - Operaciones CRUD específicas
-    \end{itemize}
-\end{enumerate}
-
-\subsubsection{Capa de Controlador}
-
-Los Servlets actúan como controladores que procesan las peticiones HTTP:
-
-\begin{itemize}
-    \item \texttt{ServletLogin} - Autenticación y gestión de sesiones
-    \item \texttt{ServletPedidos} - Procesamiento de pedidos
-    \item \texttt{ServletProductos} - Gestión del catálogo
-    \item \texttt{ServletUsuario} - Administración de usuarios
+    \item \textbf{Capa de Control (Controlador):} Actúa como intermediario entre la vista y el modelo. Procesa las peticiones del usuario, invoca la lógica de negocio y decide qué vista mostrar.
+    
+    \item \textbf{Capa de Modelo (Lógica de Negocio):} Contiene las reglas de negocio y la lógica de la aplicación. Incluye las entidades del dominio y sus comportamientos.
+    
+    \item \textbf{Capa de Persistencia (Base de Datos):} Almacena y recupera los datos de la aplicación en una base de datos relacional.
 \end{itemize}
 
-Cada Servlet sigue el patrón: \texttt{doPost()} recibe parámetros, determina la acción, invoca métodos del modelo, y redirige a la vista apropiada.
+\subsubsection{Flujo de Comunicación entre Capas}
 
-\subsubsection{Capa de Vista}
-
-Las páginas JSP presentan la interfaz de usuario organizada por roles:
-
-\begin{itemize}
-    \item \textbf{Módulo de Autenticación:} \texttt{login.jsp}, \texttt{registro.jsp}
-    \item \textbf{Módulo del Cliente:} \texttt{menu.jsp}, \texttt{carrito.jsp}, \texttt{mis-pedidos.jsp}
-    \item \textbf{Módulo Administrativo:} \texttt{dashboard.jsp}, \texttt{productos.jsp}, \texttt{pedidos.jsp}
-\end{itemize}
-
-\subsubsection{Flujo de Comunicación}
-
-El flujo típico de una operación sigue estos pasos:
+El flujo de una operación típica sigue estos pasos:
 
 \begin{enumerate}
-    \item Usuario interactúa con una \textbf{Vista (JSP)}
-    \item Vista genera petición HTTP al \textbf{Controlador (Servlet)}
-    \item Controlador invoca métodos del \textbf{Modelo}
-    \item Modelo accede a \textbf{Base de Datos} vía DAO
-    \item DAO retorna resultados al Controlador
-    \item Controlador selecciona Vista y envía respuesta
+    \item El usuario interactúa con la \textbf{Vista} (página web)
+    \item La Vista envía una petición HTTP al \textbf{Controlador}
+    \item El Controlador procesa la petición y llama a los métodos apropiados del \textbf{Modelo}
+    \item El Modelo ejecuta la lógica de negocio y accede a la \textbf{Base de Datos} si es necesario
+    \item El Modelo retorna los resultados al Controlador
+    \item El Controlador selecciona la Vista apropiada y le pasa los datos
+    \item La Vista presenta los resultados al usuario
 \end{enumerate}
+
+\subsubsection{Decisiones de Diseño}
+
+Se tomaron las siguientes decisiones clave en el diseño:
+
+\begin{itemize}
+    \item \textbf{Separación estricta de responsabilidades:} Cada capa tiene responsabilidades claramente definidas y no puede acceder directamente a capas no adyacentes.
+    
+    \item \textbf{Uso de patrones de diseño:} Se aplicaron los patrones Singleton (para conexiones a BD), DAO (para acceso a datos), y Factory (para creación de objetos).
+    
+    \item \textbf{Jerarquía de usuarios mediante herencia:} Se diseñó una clase abstracta Usuario como base para Administrador, Cajero y Cliente, permitiendo polimorfismo.
+    
+    \item \textbf{Composición para relaciones fuertes:} La relación Pedido-DetallePedido se diseñó como composición, reflejando que los detalles no existen sin el pedido.
+    
+    \item \textbf{Normalización de base de datos:} El esquema de BD sigue la tercera forma normal para evitar redundancias.
+\end{itemize}
+
+\subsubsection{Componentes por Capa}
+
+\begin{table}[H]
+\centering
+\caption{Componentes por capa en la arquitectura MVC}
+\label{tab:componentes-capa}
+\begin{tabular}{|p{3cm}|p{5cm}|p{5cm}|}
+\hline
+\textbf{Capa} & \textbf{Responsabilidades} & \textbf{Tecnologías/Patrones} \\
+\hline
+\hline
+Presentación (Vista) & Interfaz de usuario, formularios, presentación de datos & JSP, HTML, CSS, JavaScript \\
+\hline
+Control (Controlador) & Enrutamiento, validación, gestión de sesiones, seguridad & Servlets, Filtros, Listeners \\
+\hline
+Modelo (Lógica) & Reglas de negocio, entidades, validaciones & Clases Java, POO, Patrones DAO \\
+\hline
+Persistencia (BD) & Almacenamiento, recuperación, integridad de datos & MySQL, JDBC, SQL \\
+\hline
+\end{tabular}
+\end{table}
 
 \section{Implementación}
+
+\subsection{Arquitectura Implementada}
+
+A continuación se muestran las implementaciones concretas de cada capa del sistema:
+
+\subsubsection{Capa de Presentación - Vistas JSP}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1.0\textwidth]{img/capa-vista.png}
+\caption{Implementación de la capa de presentación con páginas JSP}
+\label{fig:impl-vista}
+\end{figure}
+
+La capa de presentación se implementó mediante 12 páginas JSP organizadas en tres módulos: autenticación, cliente y administración. Cada página sigue una plantilla común con cabecera, menú y pie de página para mantener consistencia visual.
+
+\subsubsection{Capa de Control - Servlets}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1.0\textwidth]{img/capa-control.png}
+\caption{Implementación de la capa de control con Servlets}
+\label{fig:impl-control}
+\end{figure}
+
+Se implementaron 4 Servlets principales que manejan las diferentes funcionalidades del sistema. Cada Servlet sigue el patrón: recibir parámetros → validar → procesar → redirigir.
+
+\subsubsection{Capa de Modelo - Clases y DAOs}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1.0\textwidth]{img/capa-modelo.png}
+\caption{Implementación de la capa de modelo con clases Java y DAOs}
+\label{fig:impl-modelo}
+\end{figure}
+
+El modelo se implementó mediante 8 clases principales y 4 DAOs. La jerarquía de Usuario demuestra la aplicación práctica de herencia y polimorfismo.
+
+\subsubsection{Capa de Persistencia - Base de Datos}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1.0\textwidth]{img/capa-persistencia.png}
+\caption{Implementación de la capa de persistencia con MySQL}
+\label{fig:impl-persistencia}
+\end{figure}
+
+La base de datos se implementó con 4 tablas principales relacionadas mediante claves foráneas, siguiendo principios de normalización.
+
 
 \subsection{Clases del Modelo}
 
@@ -1539,3 +1598,4 @@ En conclusión, el proyecto representa una aplicación completa de los principio
 \end{thebibliography}
 
 \end{document}
+
