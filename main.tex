@@ -48,10 +48,14 @@
 \newcommand{\subjectname}{Programación Orientada a Objetos II}
 
 \pagestyle{fancy}
-\fancyhf{}
-\fancyhead[L]{Universidad Nacional de Moquegua}
-\fancyhead[R]{\coursename}
-\fancyfoot[C]{Pág. \thepage}
+\fancyhf{} % Limpia todo
+\fancyhead[R]{%
+    \begin{tabular}[t]{r}
+        \textbf{UNIVERSIDAD NACIONAL DE MOQUEGUA} \\
+        \coursename
+    \end{tabular}
+}
+\fancyfoot[R]{Pág. \thepage}
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0.4pt}
 
@@ -93,94 +97,37 @@ El sistema ``Sistema de Gestión de Cafetín'' permite gestionar tres tipos de u
 
 \subsection{Programación Orientada a Objetos (POO)}
 
-La Programación Orientada a Objetos es un paradigma de programación que organiza el diseño del software en torno a objetos que contienen tanto datos como comportamientos. Este paradigma se fundamenta en cuatro principios esenciales que permiten crear sistemas modulares, reutilizables y mantenibles \cite{booch2007}. A diferencia de la programación procedural, la POO permite modelar entidades del mundo real de manera más natural y expresiva.
+La Programación Orientada a Objetos (POO) es un paradigma que estructura el software en torno a objetos que combinan datos y comportamiento. Se basa en cuatro principios fundamentales para crear sistemas modulares y reutilizables \cite{booch2007}.
 
-El \textbf{encapsulamiento} consiste en ocultar los detalles internos de implementación de un objeto, exponiendo únicamente una interfaz pública para interactuar con él. En Java, esto se logra mediante modificadores de acceso (private, protected, public) que controlan la visibilidad de atributos y métodos. Este principio mejora la seguridad del código y facilita su mantenimiento, ya que los cambios internos no afectan al código que utiliza la clase.
-
-La \textbf{herencia} es un mecanismo que permite crear nuevas clases basándose en clases existentes, heredando sus atributos y métodos. Esto promueve la reutilización de código y establece relaciones jerárquicas entre clases. En el sistema desarrollado, la clase abstracta Usuario sirve como clase base para Administrador, Cajero y Cliente, compartiendo funcionalidad común mientras permite especializaciones específicas \cite{bloch2018}.
-
-El \textbf{polimorfismo} permite que objetos de diferentes clases respondan al mismo mensaje de manera particular según su tipo. En Java, esto se manifiesta mediante la sobrecarga de métodos (mismo nombre, diferentes parámetros) y la redefinición de métodos heredados. Este principio permite escribir código más flexible y extensible, como se evidencia en los métodos abstractos de la clase Usuario que cada subclase implementa de forma específica.
-
-La \textbf{abstracción} es el proceso de identificar las características esenciales de un objeto, ignorando los detalles irrelevantes para el contexto. Las clases abstractas e interfaces en Java permiten definir contratos de comportamiento sin especificar la implementación, logrando un alto nivel de modularidad y bajo acoplamiento entre componentes \cite{martin2008}.
+El \textbf{encapsulamiento} oculta los detalles internos de un objeto, exponiendo solo una interfaz pública. La \textbf{herencia} permite crear nuevas clases a partir de otras existentes, fomentando la reutilización de código. El \textbf{polimorfismo} posibilita que objetos de diferentes clases respondan de manera específica al mismo mensaje. La \textbf{abstracción} identifica las características esenciales de un objeto, ignorando detalles no relevantes \cite{bloch2018}.
 
 \subsection{Diagramas UML}
 
-El Lenguaje Unificado de Modelado (UML) es un estándar para visualizar, especificar, construir y documentar artefactos de sistemas software \cite{fowler2003}. Los diagramas de clases son uno de los tipos más importantes de UML, mostrando la estructura estática del sistema mediante clases, atributos, métodos y relaciones.
-
-Un diagrama de clases UML representa cada clase como un rectángulo dividido en tres secciones: nombre de la clase, atributos y métodos. Los modificadores de visibilidad se indican con símbolos: + para público, - para privado, \# para protegido. Las relaciones se representan mediante diferentes tipos de líneas: líneas sólidas para asociaciones, líneas con rombos para agregación y composición, y flechas con líneas continuas para herencia.
-
-Los diagramas UML son fundamentales en las fases de análisis y diseño, permitiendo comunicar la estructura del sistema de forma visual e independiente del lenguaje de programación. Herramientas como PlantUML, draw.io y Mermaid permiten crear estos diagramas mediante código o interfaces gráficas, facilitando su actualización y versionado junto con el código fuente.
+El Lenguaje Unificado de Modelado (UML) es un estándar para visualizar y documentar sistemas software \cite{fowler2003}. Los diagramas de clases muestran la estructura estática del sistema mediante clases, sus atributos, métodos y las relaciones entre ellas. Son cruciales en las fases de análisis y diseño.
 
 \subsection{Relaciones entre Clases en POO}
 
-Las relaciones entre clases definen cómo los objetos interactúan y se conectan entre sí en un sistema orientado a objetos \cite{larman2004}. Existen varios tipos de relaciones, cada una con semántica y consecuencias diferentes en el diseño del sistema.
-
-La \textbf{asociación} es la relación más general, indicando que dos clases están conectadas de alguna manera. Puede ser unidireccional (una clase conoce a la otra) o bidireccional (ambas se conocen mutuamente). Las asociaciones tienen multiplicidad, indicando cuántos objetos de cada clase participan en la relación (uno-a-uno, uno-a-muchos, muchos-a-muchos).
-
-La \textbf{agregación} es un tipo especial de asociación que representa una relación ``todo-parte'' donde las partes pueden existir independientemente del todo. Por ejemplo, un Departamento contiene Empleados, pero los empleados pueden existir aunque se elimine el departamento. Esta relación implica una conexión débil entre los objetos participantes.
-
-La \textbf{composición} es una forma fuerte de agregación donde las partes dependen completamente del todo para su existencia. Si el objeto contenedor se destruye, sus partes también lo hacen. En el sistema desarrollado, la relación entre Pedido y DetallePedido es de composición, ya que los detalles de un pedido no pueden existir sin el pedido que los contiene.
-
-La \textbf{herencia} (también llamada generalización) establece una relación ``es-un'' entre una clase padre y sus clases hijas. Las subclases heredan todos los atributos y métodos de la superclase, pudiendo añadir funcionalidad específica o redefinir comportamientos heredados. Esta relación permite la reutilización de código y el polimorfismo, fundamentales para el diseño flexible de sistemas.
+Las relaciones definen cómo interactúan los objetos. La \textbf{asociación} indica una conexión básica entre clases. La \textbf{agregación} representa una relación "todo-parte" con independencia. La \textbf{composición} es una agregación fuerte donde la parte depende del todo. La \textbf{herencia} establece una relación "es-un" entre una superclase y sus subclases \cite{larman2004}.
 
 \subsection{MySQL y Bases de Datos Relacionales}
 
-MySQL es un sistema de gestión de bases de datos relacionales (RDBMS) de código abierto ampliamente utilizado en aplicaciones web. Una base de datos relacional organiza la información en tablas relacionadas entre sí mediante claves primarias y foráneas, garantizando la integridad referencial y consistencia de los datos \cite{dubois2013}.
-
-El modelo relacional se basa en la teoría de conjuntos y álgebra relacional, permitiendo realizar consultas complejas mediante SQL (Structured Query Language). Las operaciones básicas incluyen SELECT para consultas, INSERT para inserciones, UPDATE para actualizaciones y DELETE para eliminaciones. MySQL soporta características avanzadas como transacciones ACID, procedimientos almacenados, triggers, y vistas, que permiten implementar lógica compleja directamente en la base de datos \cite{schwartz2012}.
-
-La normalización de bases de datos es un proceso mediante el cual se organizan las tablas para minimizar la redundancia y dependencias. Las formas normales (1FN, 2FN, 3FN) establecen reglas progresivamente más estrictas para el diseño de esquemas, mejorando la integridad y eficiencia de las consultas. El diseño adecuado de índices también es crucial para optimizar el rendimiento de las consultas frecuentes.
-
-\textbf{XAMPP} es una distribución de Apache que incluye MySQL, PHP y Perl, facilitando la instalación y configuración de un entorno de desarrollo web local. Para este proyecto, se utilizó XAMPP para gestionar la base de datos MySQL, proporcionando una interfaz amigable a través de phpMyAdmin para la creación y administración de tablas, ejecución de consultas SQL, y respaldo de datos.
+MySQL es un sistema de gestión de bases de datos relacionales (RDBMS) que organiza la información en tablas relacionadas. Utiliza SQL (Structured Query Language) para definir, manipular y consultar datos, garantizando integridad y consistencia \cite{dubois2013}. \textbf{XAMPP} es una distribución que incluye MySQL, facilitando la configuración de un entorno de desarrollo local.
 
 \subsection{Entorno de Desarrollo Java Web}
 
-\subsubsection{Apache NetBeans y Java con Ant}
-
-Apache NetBeans es un entorno de desarrollo integrado (IDE) de código abierto que proporciona herramientas completas para el desarrollo de aplicaciones Java, especialmente para aplicaciones empresariales y web \cite{oracle2020}. NetBeans incluye soporte nativo para tecnologías Java EE como Servlets, JSP, JDBC, y facilita la integración con servidores de aplicaciones.
-
-Para este proyecto se utilizó \textbf{Java Web con Ant} como sistema de construcción. Apache Ant es una herramienta de automatización de compilación basada en XML que permite definir tareas de compilación, empaquetado y despliegue de aplicaciones Java. A diferencia de Maven o Gradle, Ant ofrece mayor flexibilidad en la definición de procesos de construcción personalizados, siendo ideal para proyectos académicos donde se requiere comprender cada paso del proceso de compilación y despliegue.
-
-\subsubsection{Servidor Apache Tomcat}
-
-Apache Tomcat es un servidor web y contenedor de servlets de código abierto que implementa las especificaciones Java Servlet, JavaServer Pages (JSP) y otras tecnologías Java EE \cite{hall2011}. Tomcat proporciona un entorno ``puro Java'' para ejecutar aplicaciones web, procesando peticiones HTTP y gestionando el ciclo de vida de servlets y páginas JSP.
-
-El servidor Tomcat actúa como intermediario entre las peticiones del navegador web y la aplicación Java, proporcionando servicios esenciales como:
-\begin{itemize}
-    \item Gestión del ciclo de vida de servlets y JSP
-    \item Manejo de sesiones HTTP
-    \item Procesamiento de peticiones y respuestas
-    \item Pool de conexiones a bases de datos
-    \item Gestión de seguridad y autenticación
-\end{itemize}
-
-Para este proyecto, Tomcat fue configurado en NetBeans para permitir el despliegue automático de la aplicación durante el desarrollo, facilitando las pruebas y depuración del sistema.
+Se utilizó \textbf{Apache NetBeans} como IDE, con \textbf{Ant} para la automatización del proceso de construcción. El despliegue y ejecución se realizó en el servidor \textbf{Apache Tomcat}, que es un contenedor de servlets y JSP para aplicaciones web Java \cite{hall2011}.
 
 \subsection{Patrón de Arquitectura MVC}
 
-El patrón Modelo-Vista-Controlador (MVC) es una arquitectura de software que separa la lógica de negocio, la presentación y el control de flujo en tres componentes distintos e interconectados \cite{gamma1994}. Esta separación de responsabilidades facilita el mantenimiento, la escalabilidad y el trabajo en equipo, ya que diferentes desarrolladores pueden trabajar en cada capa de forma independiente.
-
-El \textbf{Modelo} representa la lógica de negocio y los datos de la aplicación. Contiene las clases que modelan las entidades del dominio (Usuario, Producto, Pedido) y encapsula las reglas de negocio. En el sistema desarrollado, las clases del paquete modelo implementan la estructura de datos y los métodos que operan sobre ellos, independientemente de cómo se presentan o controlan.
-
-La \textbf{Vista} es responsable de la presentación de la información al usuario. En aplicaciones web Java, las vistas se implementan mediante JSP (JavaServer Pages), que combinan HTML con código Java para generar páginas dinámicas. Las vistas acceden al modelo únicamente para lectura, nunca para modificación directa, manteniendo la separación de responsabilidades.
-
-El \textbf{Controlador} actúa como intermediario entre el modelo y la vista, procesando las peticiones del usuario, invocando la lógica de negocio apropiada, y seleccionando la vista adecuada para mostrar los resultados. En Java EE, los Servlets funcionan como controladores, recibiendo peticiones HTTP, interactuando con el modelo, y redirigiendo a las vistas JSP correspondientes \cite{walls2015}.
+El patrón Modelo-Vista-Controlador (MVC) separa la aplicación en tres componentes: el \textbf{Modelo} (lógica y datos), la \textbf{Vista} (presentación) y el \textbf{Controlador} (intermediario que gestiona las peticiones). Esta separación facilita el mantenimiento y la escalabilidad \cite{gamma1994}.
 
 \subsection{Patrón DAO (Data Access Object)}
 
-El patrón DAO proporciona una interfaz abstracta para acceder a datos de cualquier fuente, típicamente una base de datos relacional. Este patrón encapsula toda la lógica de acceso a datos, separándola completamente de la lógica de negocio \cite{alur2003}. Los beneficios principales incluyen la centralización del acceso a datos, facilidad para cambiar de tecnología de persistencia, y simplificación de las pruebas unitarias mediante la posibilidad de crear implementaciones simuladas.
-
-Un DAO típico define operaciones CRUD (Create, Read, Update, Delete) para una entidad específica del dominio. Por ejemplo, UsuarioDAO proporciona métodos como insertar(), buscarPorId(), listarTodos(), actualizar() y eliminar(), encapsulando todo el código SQL necesario para estas operaciones. Esta abstracción permite que el resto de la aplicación trabaje con objetos Java sin preocuparse por los detalles de la persistencia.
-
-La implementación de DAO utiliza JDBC (Java Database Connectivity) para establecer conexiones con la base de datos, preparar consultas SQL, ejecutarlas y mapear los resultados a objetos del modelo. El manejo adecuado de conexiones, transacciones y excepciones es fundamental para garantizar la integridad y consistencia de los datos \cite{bauer2015}.
+El patrón DAO abstrae y encapsula todo el acceso a la fuente de datos (como una base de datos), proporcionando una interfaz simple para realizar operaciones CRUD (Crear, Leer, Actualizar, Eliminar). Esto separa la lógica de negocio de la lógica de persistencia \cite{alur2003}.
 
 \subsection{Servlets y JSP}
 
-Los Servlets son componentes Java del lado del servidor que extienden las capacidades de los servidores web, procesando peticiones y generando respuestas dinámicamente \cite{hall2011}. Un Servlet es una clase Java que implementa la interfaz javax.servlet.Servlet, generalmente extendiendo HttpServlet para manejar peticiones HTTP. Los métodos doGet() y doPost() procesan peticiones GET y POST respectivamente, permitiendo implementar la lógica de control de la aplicación.
-
-Las JSP (JavaServer Pages) son una tecnología que simplifica la creación de contenido web dinámico, permitiendo mezclar HTML estático con código Java. Las páginas JSP se compilan automáticamente en Servlets la primera vez que son solicitadas, combinando la simplicidad de HTML con el poder de Java. Esta tecnología facilita la creación de interfaces de usuario dinámicas sin necesidad de generar todo el HTML mediante código Java.
-
-La combinación de Servlets y JSP implementa naturalmente el patrón MVC: los Servlets actúan como controladores procesando la lógica de negocio, mientras que las JSP sirven como vistas presentando la información. Esta arquitectura permite desarrollo ágil, mantenimiento simplificado y separación clara de responsabilidades entre diseñadores (JSP) y programadores (Servlets).
+Los \textbf{Servlets} son componentes Java en el servidor que extienden sus capacidades para procesar peticiones HTTP y generar respuestas dinámicas. \textbf{JavaServer Pages (JSP)} es una tecnología que permite crear páginas web dinámicas mezclando HTML con código Java. En conjunto, son la base para implementar el controlador y la vista en aplicaciones web Java con MVC \cite{hall2011}.
 
 \section{Análisis y Diseño}
 
@@ -190,7 +137,7 @@ El diagrama de clases del modelo representa la estructura fundamental del sistem
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.9\textwidth]{img/diagramUML.png}
+\includegraphics[width=1.0\textwidth]{img/diagramUML.png}
 \caption{Diagrama de clases del modelo del sistema}
 \label{fig:diagrama-clases}
 \end{figure}
@@ -662,7 +609,7 @@ public class ServletLogin extends HttpServlet {
 \centering
 \caption{Funcionalidades Implementadas en el Sistema}
 \label{tab:funcionalidades}
-\begin{tabular}{|p{4cm}|p{10cm}|}
+\begin{tabular}{|p{3.5cm}|p{12.5cm}|}
 \hline
 \textbf{Módulo} & \textbf{Funcionalidades Logradas} \\
 \hline
@@ -839,37 +786,6 @@ Durante el desarrollo se enfrentaron y resolvieron los siguientes desafíos:
     \item \textbf{Sistema de membresías dinámico:} Se implementó un algoritmo que actualiza automáticamente el nivel de membresía según puntos acumulados.
 \end{enumerate}
 
-\subsection{Pruebas Realizadas}
-
-Se ejecutaron pruebas para validar las funcionalidades principales:
-
-\begin{table}[H]
-\centering
-\caption{Resumen de Pruebas Realizadas}
-\label{tab:pruebas}
-\begin{tabular}{|p{5cm}|p{4cm}|p{4cm}|}
-\hline
-\textbf{Funcionalidad} & \textbf{Tipo de Prueba} & \textbf{Resultado} \\
-\hline
-Autenticación de usuarios & Prueba funcional & Exitosa \\
-\hline
-Registro de clientes & Prueba de integración & Exitosa \\
-\hline
-Proceso de compra completo & Prueba de flujo completo & Exitosa \\
-\hline
-Gestión de productos (CRUD) & Prueba CRUD & Exitosa \\
-\hline
-Cálculo de descuentos por membresía & Prueba unitaria & Exitosa \\
-\hline
-Actualización de stock concurrente & Prueba concurrente & Exitosa \\
-\hline
-Persistencia en base de datos & Prueba de integración & Exitosa \\
-\hline
-Gestión de sesiones & Prueba de estado & Exitosa \\
-\hline
-\end{tabular}
-\end{table}
-
 \section{Conclusiones}
 
 El desarrollo del Sistema de Gestión de Cafetín Universitario ha permitido aplicar de manera práctica los conceptos fundamentales de la Programación Orientada a Objetos en un contexto real de desarrollo de software. La implementación exitosa del sistema demuestra la efectividad de los principios POO como herramientas para crear aplicaciones modulares, mantenibles y escalables.
@@ -883,8 +799,6 @@ La integración de tecnologías web (Servlets y JSP) con la base de datos MySQL 
 El sistema desarrollado no solo cumple con los requisitos funcionales especificados, sino que también incorpora características avanzadas como sistema de membresías, control de inventario inteligente y gestión de múltiples roles de usuario. Estas funcionalidades adicionales enriquecen la experiencia del usuario final y proporcionan herramientas valiosas para la administración del cafetín.
 
 En conclusión, el proyecto representa una aplicación completa de los principios de POO en un sistema real, demostrando cómo los conceptos teóricos se traducen en soluciones prácticas y funcionales. El conocimiento adquirido durante este desarrollo será fundamental para enfrentar desafíos más complejos en futuros proyectos de software.
-
-\section{Referencias}
 
 \begin{thebibliography}{99}
 \bibitem{booch2007} Booch, G., Maksimchuk, R. A., Engle, M. W., Young, B. J., Conallen, J., \& Houston, K. A. (2007). \emph{Object-Oriented Analysis and Design with Applications}. Addison-Wesley Professional.
@@ -915,6 +829,7 @@ En conclusión, el proyecto representa una aplicación completa de los principio
 \end{thebibliography}
 
 \end{document}
+
 
 
 
