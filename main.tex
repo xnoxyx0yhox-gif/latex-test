@@ -5,112 +5,36 @@
 \usepackage{geometry}
 \usepackage{setspace}
 \usepackage{fancyhdr}
-\usepackage{listings}
-\usepackage{xcolor}
 \usepackage{float}
 \usepackage{caption}
 \usepackage{hyperref}
-\usepackage{tcolorbox}
-\tcbuselibrary{listings,skins,breakable}
 \usepackage{enumitem}
 \usepackage{booktabs}
 \usepackage{array}
 \usepackage{amsmath}
 \usepackage{amssymb}
-\usepackage{pifont}
+\usepackage{listings}  % SOLO ESTE paquete para código
 
 \geometry{left=2.54cm,right=2.54cm,top=2.54cm,bottom=2.54cm}
 \setstretch{1.5}
 \setlength{\parindent}{1.27cm}
 
-% Configuración de listings para Java
-\definecolor{codebackground}{RGB}{248,248,248}
-\definecolor{codeframe}{RGB}{200,200,200}
-\definecolor{codekeyword}{RGB}{127,0,85}
-\definecolor{codestring}{RGB}{42,0,255}
-\definecolor{codecomment}{RGB}{63,127,95}
-
-% Estilo Java para listings
-\lstdefinestyle{javastyle}{
-    language=Java,
-    basicstyle=\footnotesize\ttfamily,
-    backgroundcolor=\color{codebackground},
-    frame=lines,
-    framesep=3mm,
-    rulecolor=\color{codeframe},
+% Configuración MUY SIMPLE para código
+\lstset{
+    basicstyle=\ttfamily\footnotesize,
+    backgroundcolor=\color{gray!10},
+    frame=single,
     numbers=left,
     numberstyle=\tiny\color{gray},
-    numbersep=6pt,
     breaklines=true,
-    keywordstyle=\color{blue}\bfseries,
-    commentstyle=\color{green!60!black},
-    stringstyle=\color{red},
-    showstringspaces=false,
     tabsize=4,
-    captionpos=b,
-    morekeywords={String, int, boolean, double, List, ArrayList, Timestamp},
-    literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
-}
-
-% Estilo SQL para listings
-\lstdefinestyle{sqlstyle}{
-    language=SQL,
-    basicstyle=\footnotesize\ttfamily,
-    backgroundcolor=\color{codebackground},
-    frame=lines,
-    framesep=3mm,
-    rulecolor=\color{codeframe},
-    numbers=left,
-    numberstyle=\tiny\color{gray},
-    numbersep=6pt,
-    breaklines=true,
-    keywordstyle=\color{blue}\bfseries,
-    commentstyle=\color{green!60!black},
-    stringstyle=\color{red},
-    showstringspaces=false,
-    tabsize=4,
-    captionpos=b,
-    morekeywords={SELECT, FROM, WHERE, INSERT, UPDATE, DELETE, CREATE, TABLE, INT, VARCHAR, PRIMARY, KEY, FOREIGN, REFERENCES, NOT, NULL}
-}
-
-% Entorno para código Java
-\newtcblisting{javacode}[2][]{
-    listing only,
-    listing style=javastyle,
-    colback=codebackground,
-    colframe=codeframe,
-    left=8mm,
-    right=4mm,
-    top=4mm,
-    bottom=4mm,
-    enhanced,
-    title=\textbf{#2},
-    fonttitle=\bfseries\small,
-    breakable,
-    #1
-}
-
-% Entorno para código SQL
-\newtcblisting{sqlcode}[2][]{
-    listing only,
-    listing style=sqlstyle,
-    colback=codebackground,
-    colframe=codeframe,
-    left=8mm,
-    right=4mm,
-    top=4mm,
-    bottom=4mm,
-    enhanced,
-    title=\textbf{#2},
-    fonttitle=\bfseries\small,
-    breakable,
-    #1
+    showstringspaces=false
 }
 
 \hypersetup{
     colorlinks=true,
     linkcolor=blue,
-    filecolor=magenta,      
+    filecolor=magenta,
     urlcolor=blue,
     citecolor=black
 }
@@ -133,24 +57,20 @@
 \begin{document}
 
 \begin{titlepage}
-\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
 \centering
-\textsc{\Large \textbf{UNIVERSIDAD NACIONAL DE MOQUEGUA}}\\[0.5cm]
-\textsc{\Large Facultad de Ingeniería y Arquitectura }\\[0.5cm]
-\textsc{\large Escuela Profesional de Ingeniería de Sistemas e Informática}\\[0.8cm]
-\includegraphics[scale=.28]{img/logo.png}\\[0.5cm] 
-{ 
-\Large{\bfseries{\reporttitle}}\\[0.5cm]
-\large{\bfseries{\reportname}}
-}\\[1.0cm]
-\emph{\large Estudiante:}\\[0.2cm]
+\textbf{\Large UNIVERSIDAD NACIONAL DE MOQUEGUA}\\[0.5cm]
+\textbf{\Large Facultad de Ingeniería y Arquitectura}\\[0.5cm]
+\textbf{\large Escuela Profesional de Ingeniería de Sistemas e Informática}\\[0.8cm]
+\includegraphics[scale=.28]{img/logo.png}\\[0.5cm]
+\textbf{\Large \reporttitle}\\[0.5cm]
+\textbf{\large \reportname}\\[1.0cm]
+\textbf{\large Estudiante:}\\[0.2cm]
 \studentname\\[0.7cm]
-\emph{\large Docente:}\\[0.2cm]
+\textbf{\large Docente:}\\[0.2cm]
 \teachername\\[0.7cm]
-\emph{\large Curso:}\\[0.2cm]
+\textbf{\large Curso:}\\[0.2cm]
 \subjectname\\[1.0cm]
-{\large \today}\\[1.5cm]
-\vfill
+\textbf{\large \today}\\[1.5cm]
 \end{titlepage}
 
 \tableofcontents
@@ -519,12 +439,11 @@ El modelo se implementó mediante 8 clases principales y 4 DAOs. La jerarquía d
 
 La base de datos se implementó con 4 tablas principales relacionadas mediante claves foráneas, siguiendo principios de normalización.
 
-
 \subsection{Clases del Modelo}
 
-\subsubsection{Usuario.java - Clase abstracta base}
+\subsubsection{Clase Usuario (abstracta)}
 
-\begin{javacode}{Usuario.java - Clase abstracta base}
+\begin{lstlisting}[caption=Usuario.java - Clase abstracta base, label=lst:usuario]
 package com.cafeteria.modelo;
 import java.sql.Timestamp;
 
@@ -537,7 +456,8 @@ public abstract class Usuario {
     protected Timestamp fechaRegistro;
     protected boolean activo;
 
-    public Usuario(String nombre, String apellido, String email, String password) {
+    public Usuario(String nombre, String apellido, 
+                   String email, String password) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
@@ -545,65 +465,15 @@ public abstract class Usuario {
         this.activo = true;
     }
 
-    public Usuario() {
-    }
-
-    // Getters y Setters con encapsulamiento
-    public int getIdUsuario() { 
-        return idUsuario; 
-    }
-    
-    public void setIdUsuario(int idUsuario) { 
-        this.idUsuario = idUsuario; 
-    }
-
-    public String getNombre() { 
-        return nombre; 
-    }
-    
-    public void setNombre(String nombre) { 
-        this.nombre = nombre; 
-    }
-
-    public String getApellido() { 
-        return apellido; 
-    }
-    
-    public void setApellido(String apellido) { 
-        this.apellido = apellido; 
-    }
-
-    // Métodos abstractos para polimorfismo
     public abstract String mostrarInfo();
     public abstract String calcularAcceso();
     public abstract String getRol();
-
-    // Métodos concretos comunes
-    public String getNombreCompleto() { 
-        return nombre + " " + apellido; 
-    }
-
-    public boolean validarCredenciales(String email, String password) {
-        return this.email.equals(email) && 
-               this.password.equals(password) && 
-               this.activo;
-    }
-
-    @Override
-    public String toString() {
-        return "Usuario{" + 
-               "id=" + idUsuario + 
-               ", nombre=" + getNombreCompleto() + 
-               ", email=" + email + 
-               ", rol=" + getRol() + 
-               '}';
-    }
 }
-\end{javacode}
+\end{lstlisting}
 
-\subsubsection{Cliente.java - Implementación concreta con herencia}
+\subsubsection{Clase Cliente}
 
-\begin{javacode}{Cliente.java - Implementación concreta}
+\begin{lstlisting}[caption=Cliente.java - Implementación concreta, label=lst:cliente]
 package com.cafeteria.modelo;
 
 public class Cliente extends Usuario {
@@ -611,135 +481,28 @@ public class Cliente extends Usuario {
     private String tipoMembresia;
     private double saldo;
 
-    public Cliente(String nombre, String apellido, String email, String password) {
+    public Cliente(String nombre, String apellido, 
+                   String email, String password) {
         super(nombre, apellido, email, password);
         this.puntosAcumulados = 0;
         this.tipoMembresia = "Ninguna";
         this.saldo = 0.0;
     }
 
-    public Cliente() {
-        super();
-        this.puntosAcumulados = 0;
-        this.tipoMembresia = "Ninguna";
-        this.saldo = 0.0;
-    }
-
-    // Getters y Setters
-    public int getPuntosAcumulados() {
-        return puntosAcumulados;
-    }
-
-    public void setPuntosAcumulados(int puntosAcumulados) {
-        this.puntosAcumulados = puntosAcumulados;
-        actualizarMembresia();
-    }
-
-    public String getTipoMembresia() {
-        return tipoMembresia;
-    }
-
-    public void setTipoMembresia(String tipoMembresia) {
-        this.tipoMembresia = tipoMembresia;
-    }
-
-    public double getSaldo() {
-        return saldo;
-    }
-
-    public void setSaldo(double saldo) {
-        this.saldo = saldo;
-    }
-
-    // Implementación de métodos abstractos (POLIMORFISMO)
-    @Override
-    public String mostrarInfo() {
-        return String.format("CLIENTE\n" +
-                           "Nombre: %s\n" +
-                           "Email: %s\n" +
-                           "Membresía: %s\n" +
-                           "Puntos: %d\n" +
-                           "Saldo: S/ %.2f\n" +
-                           "Estado: %s",
-                           getNombreCompleto(), email, tipoMembresia, 
-                           puntosAcumulados, saldo, activo ? "Activo" : "Inactivo");
-    }
-
-    @Override
-    public String calcularAcceso() {
-        return "Acceso CLIENTE: Menú, Carrito, Mis Pedidos, Mi Perfil";
-    }
-
-    @Override
-    public String getRol() {
-        return "cliente";
-    }
-
-    // Métodos específicos de Cliente
-    public boolean agregarSaldo(double monto) {
-        if (monto <= 0) {
-            return false;
-        }
-        this.saldo += monto;
-        return true;
-    }
-
-    public boolean tieneSaldoSuficiente(double monto) {
-        return this.saldo >= monto;
-    }
-
     public boolean realizarCompra(double totalCompra) {
         if (!tieneSaldoSuficiente(totalCompra)) {
             return false;
         }
-        
-        // Descontar del saldo
         this.saldo -= totalCompra;
-        
-        // Acumular puntos: 1 punto por cada S/5 gastados
         acumularPuntos(totalCompra);
-        
         return true;
     }
-
-    public void acumularPuntos(double totalCompra) {
-        int puntosGanados = (int) (totalCompra / 5);
-        this.puntosAcumulados += puntosGanados;
-        actualizarMembresia();
-    }
-
-    private void actualizarMembresia() {
-        if (puntosAcumulados >= 100) {
-            this.tipoMembresia = "Oro";
-        } else if (puntosAcumulados >= 50) {
-            this.tipoMembresia = "Plata";
-        } else if (puntosAcumulados >= 20) {
-            this.tipoMembresia = "Bronce";
-        } else {
-            this.tipoMembresia = "Ninguna";
-        }
-    }
-
-    public double calcularDescuento() {
-        switch (tipoMembresia) {
-            case "Oro":
-                return 0.15; // 15%
-            case "Plata":
-                return 0.10; // 10%
-            case "Bronce":
-                return 0.05; // 5%
-            case "Ninguna":
-                return 0.0; // 0% para nuevos usuarios
-            default:
-                return 0.0;
-        }
-    }
 }
-\end{javacode}
+\end{lstlisting}
 
-\subsubsection{Producto.java - Encapsulamiento de datos}
+\subsubsection{Clase Producto}
 
-\begin{javacode}{Producto.java - Encapsulamiento}
+\begin{lstlisting}[caption=Producto.java - Encapsulamiento, label=lst:producto]
 package com.cafeteria.modelo;
 
 public class Producto {
@@ -752,48 +515,6 @@ public class Producto {
     private boolean disponible;
     private String imagen;
 
-    public Producto() {}
-
-    public Producto(String nombre, String descripcion, double precio, int stock, String categoria) {
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.precio = precio;
-        this.stock = stock;
-        this.categoria = categoria;
-        this.disponible = true;
-    }
-
-    // Getters y Setters
-    public int getIdProducto() { return idProducto; }
-    public void setIdProducto(int idProducto) { this.idProducto = idProducto; }
-    
-    public String getNombre() { return nombre; }
-    public void setNombre(String nombre) { this.nombre = nombre; }
-    
-    public String getDescripcion() { return descripcion; }
-    public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
-    
-    public double getPrecio() { return precio; }
-    public void setPrecio(double precio) { this.precio = precio; }
-    
-    public int getStock() { return stock; }
-    public void setStock(int stock) { 
-        this.stock = stock;
-        if (this.stock <= 0) {
-            this.disponible = false;
-        }
-    }
-    
-    public String getCategoria() { return categoria; }
-    public void setCategoria(String categoria) { this.categoria = categoria; }
-    
-    public boolean isDisponible() { return disponible; }
-    public void setDisponible(boolean disponible) { this.disponible = disponible; }
-    
-    public String getImagen() { return imagen; }
-    public void setImagen(String imagen) { this.imagen = imagen; }
-
-    // Métodos de lógica de negocio
     public boolean hayStock() {
         return stock > 0 && disponible;
     }
@@ -806,248 +527,53 @@ public class Producto {
             this.disponible = true;
         }
     }
-
-    public boolean verificarDisponibilidad() {
-        if (!disponible || stock <= 0) {
-            this.disponible = false;
-            return false;
-        }
-        return true;
-    }
-
-    public double calcularPrecioConDescuento(double descuento) {
-        if (descuento < 0 || descuento > 1) {
-            return precio;
-        }
-        return precio * (1 - descuento);
-    }
-
-    public String obtenerEstado() {
-        if (!disponible) return "No disponible";
-        if (stock <= 5) return "Stock bajo";
-        if (stock <= 10) return "Stock medio";
-        return "Disponible";
-    }
-
-    @Override
-    public String toString() {
-        return String.format("Producto{id=%d, nombre='%s', precio=S/%.2f, stock=%d, estado='%s'}", 
-                           idProducto, nombre, precio, stock, obtenerEstado());
-    }
 }
-\end{javacode}
+\end{lstlisting}
 
-\subsubsection{Pedido.java - Composición y relaciones}
+\subsection{Patrón DAO}
 
-\begin{javacode}{Pedido.java - Composición}
-package com.cafeteria.modelo;
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
+\subsubsection{ConexionBD.java}
 
-public class Pedido {
-    private int idPedido;
-    private int idUsuario;
-    private Timestamp fechaPedido;
-    private double total;
-    private String estado;
-    private String metodoPago;
-    private String observaciones;
-    
-    // COMPOSICIÓN: El pedido contiene una lista de detalles
-    private List<DetallePedido> detalles;
-
-    public Pedido() {
-        this.detalles = new ArrayList<>();
-        this.estado = "pendiente";
-        this.total = 0.0;
-    }
-
-    public Pedido(int idUsuario, String metodoPago) {
-        this.idUsuario = idUsuario;
-        this.metodoPago = metodoPago;
-        this.estado = "pendiente";
-        this.total = 0.0;
-        this.detalles = new ArrayList<>();
-    }
-
-    // Getters y Setters
-    public int getIdPedido() { return idPedido; }
-    public void setIdPedido(int idPedido) { this.idPedido = idPedido; }
-    
-    public int getIdUsuario() { return idUsuario; }
-    public void setIdUsuario(int idUsuario) { this.idUsuario = idUsuario; }
-    
-    public Timestamp getFechaPedido() { return fechaPedido; }
-    public void setFechaPedido(Timestamp fechaPedido) { this.fechaPedido = fechaPedido; }
-    
-    public double getTotal() { return total; }
-    public void setTotal(double total) { this.total = total; }
-    
-    public String getEstado() { return estado; }
-    public void setEstado(String estado) { this.estado = estado; }
-    
-    public String getMetodoPago() { return metodoPago; }
-    public void setMetodoPago(String metodoPago) { this.metodoPago = metodoPago; }
-    
-    public String getObservaciones() { return observaciones; }
-    public void setObservaciones(String observaciones) { this.observaciones = observaciones; }
-    
-    public List<DetallePedido> getDetalles() { return detalles; }
-    public void setDetalles(List<DetallePedido> detalles) { this.detalles = detalles; }
-
-    // Métodos para gestionar la composición
-    public void agregarDetalle(DetallePedido detalle) {
-        this.detalles.add(detalle);
-        calcularTotal();
-    }
-
-    public void calcularTotal() {
-        this.total = 0;
-        for (DetallePedido detalle : detalles) {
-            this.total += detalle.getSubtotal();
-        }
-    }
-
-    public void cambiarEstado(String nuevoEstado) {
-        String[] estadosValidos = {"pendiente", "preparando", "listo", "entregado", "cancelado"};
-        for (String estadoValido : estadosValidos) {
-            if (estadoValido.equals(nuevoEstado)) {
-                this.estado = nuevoEstado;
-                return;
-            }
-        }
-        throw new IllegalArgumentException("Estado no válido: " + nuevoEstado);
-    }
-
-    public String generarTicket() {
-        StringBuilder ticket = new StringBuilder();
-        ticket.append("========================================\n");
-        ticket.append("         CAFETÍN UNIVERSITARIO          \n");
-        ticket.append("========================================\n");
-        ticket.append(String.format("Pedido #%d\n", idPedido));
-        ticket.append(String.format("Fecha: %s\n", fechaPedido));
-        ticket.append(String.format("Estado: %s\n", estado.toUpperCase()));
-        ticket.append("----------------------------------------\n");
-        ticket.append("Productos:\n");
-        
-        for (DetallePedido detalle : detalles) {
-            ticket.append(String.format("  %s x%d - S/%.2f\n", 
-                detalle.getNombreProducto(), 
-                detalle.getCantidad(), 
-                detalle.getSubtotal()));
-        }
-        
-        ticket.append("----------------------------------------\n");
-        ticket.append(String.format("TOTAL: S/%.2f\n", total));
-        ticket.append(String.format("Método de pago: %s\n", metodoPago));
-        if (observaciones != null && !observaciones.isEmpty()) {
-            ticket.append(String.format("Observaciones: %s\n", observaciones));
-        }
-        ticket.append("========================================\n");
-        ticket.append("      ¡Gracias por su compra!          \n");
-        ticket.append("========================================\n");
-        
-        return ticket.toString();
-    }
-
-    public boolean validarStock() {
-        if (detalles == null || detalles.isEmpty()) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return String.format("Pedido{id=%d, total=S/%.2f, estado='%s', productos=%d}", 
-                           idPedido, total, estado, detalles.size());
-    }
-}
-\end{javacode}
-
-\subsection{Patrón DAO para Persistencia}
-
-\subsubsection{ConexionBD.java - Patrón Singleton}
-
-\begin{javacode}{ConexionBD.java - Singleton para conexiones}
+\begin{lstlisting}[caption=ConexionBD.java - Singleton, label=lst:conexion]
 package com.cafeteria.dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConexionBD {
-    // Datos de conexión
     private static final String URL = "jdbc:mysql://localhost:3306/cafetin";
     private static final String USUARIO = "root";
     private static final String PASSWORD = "";
-    private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
-    
-    // Instancia única (SINGLETON)
     private static Connection conexion = null;
 
-    // Constructor privado para prevenir instanciación
-    private ConexionBD() {
-    }
+    private ConexionBD() {}
 
-    // Método para obtener la conexión (SINGLETON)
     public static Connection getConexion() {
         try {
             if (conexion == null || conexion.isClosed()) {
-                // Cargar el driver
-                Class.forName(DRIVER);
-                // Establecer conexión
+                Class.forName("com.mysql.cj.jdbc.Driver");
                 conexion = DriverManager.getConnection(URL, USUARIO, PASSWORD);
-                System.out.println("✅ Conexión exitosa a la base de datos");
             }
-        } catch (ClassNotFoundException e) {
-            System.err.println("❌ Error: Driver no encontrado");
-            System.err.println("Asegúrate de tener mysql-connector-java.jar en WEB-INF/lib/");
-            e.printStackTrace();
-        } catch (SQLException e) {
-            System.err.println("❌ Error al conectar con la base de datos");
-            System.err.println("Verifica que XAMPP esté ejecutando MySQL");
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return conexion;
     }
-
-    // Método para cerrar la conexión
-    public static void cerrarConexion() {
-        try {
-            if (conexion != null && !conexion.isClosed()) {
-                conexion.close();
-                System.out.println("✅ Conexión cerrada correctamente");
-            }
-        } catch (SQLException e) {
-            System.err.println("❌ Error al cerrar la conexión");
-            e.printStackTrace();
-        }
-    }
-
-    // Método para probar la conexión
-    public static boolean probarConexion() {
-        Connection conn = getConexion();
-        return conn != null;
-    }
 }
-\end{javacode}
+\end{lstlisting}
 
-\subsubsection{UsuarioDAO.java - Mapeo objeto-relacional con herencia}
+\subsubsection{UsuarioDAO.java}
 
-\begin{javacode}{UsuarioDAO.java - Mapeo con herencia}
+\begin{lstlisting}[caption=UsuarioDAO.java - Mapeo OR, label=lst:usuariodao]
 package com.cafeteria.dao;
 import com.cafeteria.modelo.*;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class UsuarioDAO {
-    // Autenticar usuario con mapeo polimórfico
     public Usuario autenticar(String email, String password) {
         Usuario usuario = null;
         String sql = "SELECT * FROM usuarios WHERE email = ? " +
-                    "AND password = MD5(?) AND activo = true";
+                     "AND password = MD5(?) AND activo = true";
         
         try (Connection conn = ConexionBD.getConexion();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -1059,287 +585,73 @@ public class UsuarioDAO {
             if (rs.next()) {
                 String rol = rs.getString("rol");
                 
-                // Creación polimórfica según el rol
                 switch (rol) {
                     case "administrador":
                         Administrador admin = new Administrador();
-                        admin.setIdUsuario(rs.getInt("id_usuario"));
-                        admin.setNombre(rs.getString("nombre"));
-                        admin.setApellido(rs.getString("apellido"));
-                        admin.setEmail(rs.getString("email"));
-                        admin.setFechaRegistro(rs.getTimestamp("fecha_registro"));
-                        admin.setActivo(rs.getBoolean("activo"));
-                        admin.setAreaGestion(rs.getString("area_gestion"));
-                        admin.setNivelAcceso(rs.getInt("nivel_acceso"));
+                        // ... mapeo de campos
                         usuario = admin;
                         break;
-                        
                     case "cliente":
                         Cliente cliente = new Cliente();
-                        cliente.setIdUsuario(rs.getInt("id_usuario"));
-                        cliente.setNombre(rs.getString("nombre"));
-                        cliente.setApellido(rs.getString("apellido"));
-                        cliente.setEmail(rs.getString("email"));
-                        cliente.setFechaRegistro(rs.getTimestamp("fecha_registro"));
-                        cliente.setActivo(rs.getBoolean("activo"));
-                        cliente.setPuntosAcumulados(rs.getInt("puntos_acumulados"));
-                        cliente.setTipoMembresia(rs.getString("tipo_membresia"));
-                        cliente.setSaldo(rs.getDouble("saldo"));
+                        // ... mapeo de campos
                         usuario = cliente;
-                        break;
-                        
-                    case "cajero":
-                        Cajero cajero = new Cajero();
-                        cajero.setIdUsuario(rs.getInt("id_usuario"));
-                        cajero.setNombre(rs.getString("nombre"));
-                        cajero.setApellido(rs.getString("apellido"));
-                        cajero.setEmail(rs.getString("email"));
-                        cajero.setFechaRegistro(rs.getTimestamp("fecha_registro"));
-                        cajero.setActivo(rs.getBoolean("activo"));
-                        cajero.setTurno(rs.getString("turno"));
-                        cajero.setVentasDiarias(rs.getDouble("ventas_diarias"));
-                        usuario = cajero;
                         break;
                 }
             }
         } catch (SQLException e) {
-            System.err.println("Error al autenticar usuario: " + e.getMessage());
+            e.printStackTrace();
         }
         return usuario;
-    }
-
-    // Insertar usuario con discriminación por tipo
-    public boolean insertar(Usuario usuario) {
-        String sql = "INSERT INTO usuarios (nombre, apellido, email, password, rol, " +
-                    "area_gestion, nivel_acceso, puntos_acumulados, tipo_membresia, turno, saldo) " +
-                    "VALUES (?, ?, ?, MD5(?), ?, ?, ?, ?, ?, ?, ?)";
-        
-        try (Connection conn = ConexionBD.getConexion();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            
-            stmt.setString(1, usuario.getNombre());
-            stmt.setString(2, usuario.getApellido());
-            stmt.setString(3, usuario.getEmail());
-            stmt.setString(4, usuario.getPassword());
-            stmt.setString(5, usuario.getRol());
-            
-            // Configurar campos específicos según el tipo de usuario
-            if (usuario instanceof Administrador) {
-                Administrador admin = (Administrador) usuario;
-                stmt.setString(6, admin.getAreaGestion());
-                stmt.setInt(7, admin.getNivelAcceso());
-                stmt.setNull(8, Types.INTEGER);
-                stmt.setNull(9, Types.VARCHAR);
-                stmt.setNull(10, Types.VARCHAR);
-                stmt.setNull(11, Types.DOUBLE);
-            } else if (usuario instanceof Cliente) {
-                Cliente cliente = (Cliente) usuario;
-                stmt.setNull(6, Types.VARCHAR);
-                stmt.setNull(7, Types.INTEGER);
-                stmt.setInt(8, cliente.getPuntosAcumulados());
-                stmt.setString(9, cliente.getTipoMembresia());
-                stmt.setNull(10, Types.VARCHAR);
-                stmt.setDouble(11, cliente.getSaldo());
-            } else if (usuario instanceof Cajero) {
-                Cajero cajero = (Cajero) usuario;
-                stmt.setNull(6, Types.VARCHAR);
-                stmt.setNull(7, Types.INTEGER);
-                stmt.setNull(8, Types.INTEGER);
-                stmt.setNull(9, Types.VARCHAR);
-                stmt.setString(10, cajero.getTurno());
-                stmt.setNull(11, Types.DOUBLE);
-            }
-            
-            int filasAfectadas = stmt.executeUpdate();
-            return filasAfectadas > 0;
-        } catch (SQLException e) {
-            System.err.println("Error al insertar usuario: " + e.getMessage());
-            return false;
-        }
-    }
-
-    // Buscar usuario por ID
-    public Usuario buscarPorId(int id) {
-        Usuario usuario = null;
-        String sql = "SELECT * FROM usuarios WHERE id_usuario = ?";
-        
-        try (Connection conn = ConexionBD.getConexion();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            
-            stmt.setInt(1, id);
-            ResultSet rs = stmt.executeQuery();
-            
-            if (rs.next()) {
-                String rol = rs.getString("rol");
-                
-                switch (rol) {
-                    case "administrador":
-                        Administrador admin = new Administrador();
-                        mapearUsuarioBase(admin, rs);
-                        admin.setAreaGestion(rs.getString("area_gestion"));
-                        admin.setNivelAcceso(rs.getInt("nivel_acceso"));
-                        usuario = admin;
-                        break;
-                        
-                    case "cliente":
-                        Cliente cliente = new Cliente();
-                        mapearUsuarioBase(cliente, rs);
-                        cliente.setPuntosAcumulados(rs.getInt("puntos_acumulados"));
-                        cliente.setTipoMembresia(rs.getString("tipo_membresia"));
-                        cliente.setSaldo(rs.getDouble("saldo"));
-                        usuario = cliente;
-                        break;
-                        
-                    case "cajero":
-                        Cajero cajero = new Cajero();
-                        mapearUsuarioBase(cajero, rs);
-                        cajero.setTurno(rs.getString("turno"));
-                        cajero.setVentasDiarias(rs.getDouble("ventas_diarias"));
-                        usuario = cajero;
-                        break;
-                }
-            }
-        } catch (SQLException e) {
-            System.err.println("Error al buscar usuario: " + e.getMessage());
-        }
-        return usuario;
-    }
-
-    // Método auxiliar para mapear atributos comunes
-    private void mapearUsuarioBase(Usuario usuario, ResultSet rs) throws SQLException {
-        usuario.setIdUsuario(rs.getInt("id_usuario"));
-        usuario.setNombre(rs.getString("nombre"));
-        usuario.setApellido(rs.getString("apellido"));
-        usuario.setEmail(rs.getString("email"));
-        usuario.setFechaRegistro(rs.getTimestamp("fecha_registro"));
-        usuario.setActivo(rs.getBoolean("activo"));
     }
 }
-\end{javacode}
+\end{lstlisting}
 
-\subsection{Servlets como Controladores}
+\subsection{Servlets}
 
-\subsubsection{ServletLogin.java - Controlador de autenticación}
+\subsubsection{ServletLogin.java}
 
-\begin{javacode}{ServletLogin.java - Controlador de autenticación}
+\begin{lstlisting}[caption=ServletLogin.java - Controlador, label=lst:servletlogin]
 package com.cafeteria.controlador;
 import com.cafeteria.dao.UsuarioDAO;
 import com.cafeteria.modelo.*;
 import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
+import javax.servlet.*;
 import javax.servlet.http.*;
 
-@WebServlet(name = "ServletLogin", urlPatterns = {"/ServletLogin"})
+@WebServlet("/ServletLogin")
 public class ServletLogin extends HttpServlet {
     private UsuarioDAO usuarioDAO = new UsuarioDAO();
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, 
+                         HttpServletResponse response)
             throws ServletException, IOException {
         
         String accion = request.getParameter("accion");
         
         if ("login".equals(accion)) {
-            procesarLogin(request, response);
-        } else if ("registro".equals(accion)) {
-            procesarRegistro(request, response);
-        } else if ("logout".equals(accion)) {
-            procesarLogout(request, response);
-        }
-    }
-
-    private void procesarLogin(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        
-        // Delegar autenticación al modelo (DAO)
-        Usuario usuario = usuarioDAO.autenticar(email, password);
-        
-        if (usuario != null) {
-            // Configurar sesión HTTP
-            HttpSession session = request.getSession();
-            session.setAttribute("usuario", usuario);
-            session.setAttribute("idUsuario", usuario.getIdUsuario());
-            session.setAttribute("nombreUsuario", usuario.getNombreCompleto());
-            session.setAttribute("rol", usuario.getRol());
+            String email = request.getParameter("email");
+            String password = request.getParameter("password");
             
-            // Configurar atributos específicos según tipo de usuario
-            if (usuario instanceof Administrador) {
-                Administrador admin = (Administrador) usuario;
-                session.setAttribute("areaGestion", admin.getAreaGestion());
-                session.setAttribute("nivelAcceso", admin.getNivelAcceso());
-            } else if (usuario instanceof Cliente) {
-                Cliente cliente = (Cliente) usuario;
-                session.setAttribute("puntosAcumulados", cliente.getPuntosAcumulados());
-                session.setAttribute("tipoMembresia", cliente.getTipoMembresia());
-            } else if (usuario instanceof Cajero) {
-                Cajero cajero = (Cajero) usuario;
-                session.setAttribute("turno", cajero.getTurno());
-            }
+            Usuario usuario = usuarioDAO.autenticar(email, password);
             
-            // Redirigir según rol (POLIMORFISMO en acción)
-            if (usuario instanceof Administrador || usuario instanceof Cajero) {
-                response.sendRedirect("dashboard.jsp");
+            if (usuario != null) {
+                HttpSession session = request.getSession();
+                session.setAttribute("usuario", usuario);
+                session.setAttribute("rol", usuario.getRol());
+                
+                if (usuario instanceof Administrador) {
+                    response.sendRedirect("dashboard.jsp");
+                } else {
+                    response.sendRedirect("menu.jsp");
+                }
             } else {
-                response.sendRedirect("menu.jsp");
+                request.setAttribute("error", "Credenciales incorrectas");
+                request.getRequestDispatcher("login.jsp").forward(request, response);
             }
-        } else {
-            request.setAttribute("error", "Email o contraseña incorrectos");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
         }
-    }
-
-    private void procesarRegistro(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
-        String nombre = request.getParameter("nombre");
-        String apellido = request.getParameter("apellido");
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        String confirmarPassword = request.getParameter("confirmarPassword");
-        
-        // Validar contraseñas
-        if (!password.equals(confirmarPassword)) {
-            request.setAttribute("error", "Las contraseñas no coinciden");
-            request.getRequestDispatcher("registro.jsp").forward(request, response);
-            return;
-        }
-        
-        // Crear objeto Cliente
-        Cliente cliente = new Cliente(nombre, apellido, email, password);
-        
-        // Insertar en base de datos
-        boolean registrado = usuarioDAO.insertar(cliente);
-        
-        if (registrado) {
-            request.setAttribute("mensaje", "Registro exitoso. Ya puedes iniciar sesión.");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
-        } else {
-            request.setAttribute("error", "Error al registrar. El email podría estar en uso.");
-            request.getRequestDispatcher("registro.jsp").forward(request, response);
-        }
-    }
-
-    private void procesarLogout(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
-        HttpSession session = request.getSession(false);
-        if (session != null) {
-            session.invalidate();
-        }
-        response.sendRedirect("index.jsp");
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        doPost(request, response);
     }
 }
-\end{javacode}
+\end{lstlisting}
 
 \section{Resultados y Pruebas}
 
@@ -1538,22 +850,21 @@ Se ejecutaron pruebas para validar las funcionalidades principales:
 \hline
 \textbf{Funcionalidad} & \textbf{Tipo de Prueba} & \textbf{Resultado} \\
 \hline
+Autenticación de usuarios & Prueba funcional & Exitosa \\
 \hline
-Autenticación de usuarios & Prueba funcional & \textcolor{green}{Exitosa} \\
+Registro de clientes & Prueba de integración & Exitosa \\
 \hline
-Registro de clientes & Prueba de integración & \textcolor{green}{Exitosa} \\
+Proceso de compra completo & Prueba de flujo completo & Exitosa \\
 \hline
-Proceso de compra completo & Prueba de flujo completo & \textcolor{green}{Exitosa} \\
+Gestión de productos (CRUD) & Prueba CRUD & Exitosa \\
 \hline
-Gestión de productos (CRUD) & Prueba CRUD & \textcolor{green}{Exitosa} \\
+Cálculo de descuentos por membresía & Prueba unitaria & Exitosa \\
 \hline
-Cálculo de descuentos por membresía & Prueba unitaria & \textcolor{green}{Exitosa} \\
+Actualización de stock concurrente & Prueba concurrente & Exitosa \\
 \hline
-Actualización de stock concurrente & Prueba concurrente & \textcolor{green}{Exitosa} \\
+Persistencia en base de datos & Prueba de integración & Exitosa \\
 \hline
-Persistencia en base de datos & Prueba de integración & \textcolor{green}{Exitosa} \\
-\hline
-Gestión de sesiones & Prueba de estado & \textcolor{green}{Exitosa} \\
+Gestión de sesiones & Prueba de estado & Exitosa \\
 \hline
 \end{tabular}
 \end{table}
@@ -1603,6 +914,7 @@ En conclusión, el proyecto representa una aplicación completa de los principio
 \end{thebibliography}
 
 \end{document}
+
 
 
 
