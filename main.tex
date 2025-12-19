@@ -51,7 +51,7 @@
 \fancyhf{} % Limpia todo
 \fancyhead[R]{%
     \begin{tabular}[t]{r}
-        \textbf{UNIVERSIDAD NACIONAL DE MOQUEGUA} \\
+        \textbf{Universidad Nacional de Moquegua} \\
         \coursename
     \end{tabular}
 }
@@ -97,37 +97,37 @@ El sistema ``Sistema de Gestión de Cafetín'' permite gestionar tres tipos de u
 
 \subsection{Programación Orientada a Objetos (POO)}
 
-La Programación Orientada a Objetos (POO) es un paradigma que estructura el software en torno a objetos que combinan datos y comportamiento. Se basa en cuatro principios fundamentales para crear sistemas modulares y reutilizables \cite{booch2007}.
-
-El \textbf{encapsulamiento} oculta los detalles internos de un objeto, exponiendo solo una interfaz pública. La \textbf{herencia} permite crear nuevas clases a partir de otras existentes, fomentando la reutilización de código. El \textbf{polimorfismo} posibilita que objetos de diferentes clases respondan de manera específica al mismo mensaje. La \textbf{abstracción} identifica las características esenciales de un objeto, ignorando detalles no relevantes \cite{bloch2018}.
+La Programación Orientada a Objetos es un paradigma que organiza el software en torno a objetos que contienen datos y comportamientos. Se fundamenta en cuatro principios esenciales \cite{booch2007}:
+El \textbf{encapsulamiento} oculta los detalles internos de un objeto, exponiendo solo una interfaz pública. En Java, esto se logra mediante modificadores de acceso (private, protected, public) que controlan la visibilidad de atributos y métodos.
+La \textbf{herencia} permite crear nuevas clases basándose en clases existentes, heredando sus atributos y métodos. En el sistema desarrollado, la clase abstracta Usuario sirve como base para Administrador, Cajero y Cliente \cite{bloch2018}.
+El \textbf{polimorfismo} permite que objetos de diferentes clases respondan al mismo mensaje de manera particular. En Java, esto se manifiesta mediante sobrecarga y redefinición de métodos.
+La \textbf{abstracción} identifica las características esenciales de un objeto. Las clases abstractas e interfaces en Java permiten definir contratos de comportamiento sin especificar la implementación \cite{martin2008}.
 
 \subsection{Diagramas UML}
 
-El Lenguaje Unificado de Modelado (UML) es un estándar para visualizar y documentar sistemas software \cite{fowler2003}. Los diagramas de clases muestran la estructura estática del sistema mediante clases, sus atributos, métodos y las relaciones entre ellas. Son cruciales en las fases de análisis y diseño.
-
+El Lenguaje Unificado de Modelado (UML) es un estándar para visualizar y documentar sistemas software \cite{fowler2003}. Los diagramas de clases muestran la estructura del sistema mediante clases, atributos, métodos y relaciones, representando cada clase como un rectángulo dividido en tres secciones. Los modificadores de visibilidad se indican con símbolos: + (público), - (privado), # (protegido).
 \subsection{Relaciones entre Clases en POO}
-
-Las relaciones definen cómo interactúan los objetos. La \textbf{asociación} indica una conexión básica entre clases. La \textbf{agregación} representa una relación "todo-parte" con independencia. La \textbf{composición} es una agregación fuerte donde la parte depende del todo. La \textbf{herencia} establece una relación "es-un" entre una superclase y sus subclases \cite{larman2004}.
-
+Las relaciones entre clases definen cómo los objetos interactúan en un sistema \cite{larman2004}:
+La \textbf{asociación} indica que dos clases están conectadas, pudiendo ser unidireccional o bidireccional, con multiplicidad específica (uno-a-uno, uno-a-muchos, muchos-a-muchos).
+La \textbf{agregación} representa una relación ``todo-parte'' donde las partes pueden existir independientemente del todo.
+La \textbf{composición} es una agregación fuerte donde las partes dependen completamente del todo. En el sistema, la relación entre Pedido y DetallePedido es de composición.
+La \textbf{herencia} establece una relación ``es-un'' entre una clase padre y sus clases hijas, permitiendo reutilización de código y polimorfismo.
 \subsection{MySQL y Bases de Datos Relacionales}
-
-MySQL es un sistema de gestión de bases de datos relacionales (RDBMS) que organiza la información en tablas relacionadas. Utiliza SQL (Structured Query Language) para definir, manipular y consultar datos, garantizando integridad y consistencia \cite{dubois2013}. \textbf{XAMPP} es una distribución que incluye MySQL, facilitando la configuración de un entorno de desarrollo local.
-
+MySQL es un sistema de gestión de bases de datos relacionales que organiza la información en tablas relacionadas mediante claves primarias y foráneas \cite{dubois2013}. Utiliza SQL para realizar operaciones como SELECT, INSERT, UPDATE y DELETE. La normalización minimiza la redundancia organizando las tablas según formas normales (1FN, 2FN, 3FN) \cite{schwartz2012}.
+\textbf{XAMPP} es una distribución que incluye MySQL, facilitando la instalación de un entorno de desarrollo local con phpMyAdmin para gestionar la base de datos.
 \subsection{Entorno de Desarrollo Java Web}
-
-Se utilizó \textbf{Apache NetBeans} como IDE, con \textbf{Ant} para la automatización del proceso de construcción. El despliegue y ejecución se realizó en el servidor \textbf{Apache Tomcat}, que es un contenedor de servlets y JSP para aplicaciones web Java \cite{hall2011}.
-
+Apache NetBeans es un IDE que proporciona herramientas para el desarrollo de aplicaciones Java, con soporte para Servlets, JSP y JDBC \cite{oracle2020}. Para este proyecto se utilizó \textbf{Java Web con Ant}, una herramienta de automatización basada en XML que permite definir procesos de compilación y despliegue personalizados.
+Apache Tomcat es un contenedor de servlets que implementa las especificaciones Java Servlet y JSP \cite{hall2011}. Actúa como intermediario entre el navegador y la aplicación Java, gestionando el ciclo de vida de servlets, sesiones HTTP y conexiones a bases de datos.
 \subsection{Patrón de Arquitectura MVC}
-
-El patrón Modelo-Vista-Controlador (MVC) separa la aplicación en tres componentes: el \textbf{Modelo} (lógica y datos), la \textbf{Vista} (presentación) y el \textbf{Controlador} (intermediario que gestiona las peticiones). Esta separación facilita el mantenimiento y la escalabilidad \cite{gamma1994}.
-
+El patrón Modelo-Vista-Controlador separa la lógica de negocio, la presentación y el control de flujo \cite{gamma1994}:
+El \textbf{Modelo} representa la lógica de negocio y los datos, conteniendo las clases del dominio (Usuario, Producto, Pedido).
+La \textbf{Vista} presenta la información al usuario mediante JSP, que combinan HTML con código Java para generar páginas dinámicas.
+El \textbf{Controlador} procesa las peticiones del usuario mediante Servlets, invocando la lógica de negocio y seleccionando la vista apropiada \cite{walls2015}.
 \subsection{Patrón DAO (Data Access Object)}
-
-El patrón DAO abstrae y encapsula todo el acceso a la fuente de datos (como una base de datos), proporcionando una interfaz simple para realizar operaciones CRUD (Crear, Leer, Actualizar, Eliminar). Esto separa la lógica de negocio de la lógica de persistencia \cite{alur2003}.
-
+El patrón DAO encapsula toda la lógica de acceso a datos, separándola de la lógica de negocio \cite{alur2003}. Define operaciones CRUD (Create, Read, Update, Delete) para cada entidad, utilizando JDBC para interactuar con la base de datos y mapear resultados a objetos del modelo \cite{bauer2015}.
 \subsection{Servlets y JSP}
-
-Los \textbf{Servlets} son componentes Java en el servidor que extienden sus capacidades para procesar peticiones HTTP y generar respuestas dinámicas. \textbf{JavaServer Pages (JSP)} es una tecnología que permite crear páginas web dinámicas mezclando HTML con código Java. En conjunto, son la base para implementar el controlador y la vista en aplicaciones web Java con MVC \cite{hall2011}.
+Los Servlets son componentes Java del servidor que procesan peticiones HTTP mediante métodos doGet() y doPost() \cite{hall2011}. Las JSP simplifican la creación de contenido dinámico mezclando HTML con código Java, compilándose automáticamente en Servlets.
+La combinación de Servlets (controladores) y JSP (vistas) implementa naturalmente el patrón MVC, permitiendo desarrollo ágil y separación clara de responsabilidades.
 
 \section{Análisis y Diseño}
 
@@ -155,46 +155,19 @@ El diagrama presenta las clases principales que modelan el dominio del negocio:
 Este diseño permite una clara separación de responsabilidades y facilita la extensibilidad del sistema, ya que agregar nuevos tipos de usuarios o entidades solo requiere crear nuevas clases que sigan la estructura establecida.
 
 \subsection{Explicación de las Relaciones entre Clases}
-
-Las relaciones entre clases definen cómo los objetos del sistema interactúan y se conectan entre sí. Cada tipo de relación tiene implicaciones específicas en la implementación y el comportamiento del sistema.
-
+Las relaciones entre clases definen cómo los objetos del sistema interactúan entre sí, con implicaciones específicas en la implementación.
 \subsubsection{Herencia en la jerarquía de Usuario}
-
-La clase abstracta \texttt{Usuario} define la estructura y comportamiento común para todos los tipos de usuarios del sistema. Las clases \texttt{Administrador}, \texttt{Cajero} y \texttt{Cliente} heredan de \texttt{Usuario}, especializando su funcionalidad según el rol específico. Esta relación de herencia permite aplicar \textbf{polimorfismo}, donde un método puede trabajar con cualquier tipo de Usuario sin conocer su tipo específico, simplemente invocando los métodos abstractos que cada subclase implementa de forma particular.
-
-La decisión de hacer \texttt{Usuario} abstracta se justifica porque no tiene sentido crear instancias de un ``Usuario'' genérico; todo usuario del sistema debe tener un rol específico (administrador, cajero o cliente). Los métodos abstractos como \texttt{mostrarInfo()}, \texttt{calcularAcceso()} y \texttt{getRol()} obligan a cada subclase a proporcionar su propia implementación, garantizando que cada tipo de usuario tenga comportamiento específico para estas operaciones.
-
-Esta jerarquía ejemplifica el principio de \textbf{abstracción}, donde se identifican las características esenciales comunes (nombre, email, password, fechaRegistro) y se definen en la clase base, mientras que las características específicas de cada rol se implementan en las subclases correspondientes.
-
+La clase abstracta \texttt{Usuario} define la estructura común para todos los tipos de usuarios. Las clases \texttt{Administrador}, \texttt{Cajero} y \texttt{Cliente} heredan de \texttt{Usuario}, especializando su funcionalidad según el rol. Esta herencia permite aplicar \textbf{polimorfismo}, donde un método puede trabajar con cualquier tipo de Usuario invocando métodos abstractos que cada subclase implementa de forma particular.
+\texttt{Usuario} es abstracta porque no tiene sentido crear instancias genéricas; todo usuario debe tener un rol específico. Los métodos abstractos como \texttt{mostrarInfo()}, \texttt{calcularAcceso()} y \texttt{getRol()} obligan a cada subclase a proporcionar su implementación, garantizando comportamiento específico.
 \subsubsection{Asociación entre Cliente y Pedido}
-
-Un \texttt{Cliente} puede realizar múltiples \texttt{Pedidos} a lo largo del tiempo, estableciendo una relación \textbf{uno-a-muchos} (1..*). Esta asociación se implementa mediante el atributo \texttt{idUsuario} en la clase \texttt{Pedido}, que funciona como clave foránea referenciando al cliente que realizó el pedido.
-
-La relación es \textbf{unidireccional} desde \texttt{Pedido} hacia \texttt{Cliente}, ya que los pedidos necesitan saber quién los realizó para propósitos de registro y seguimiento, pero un cliente no mantiene una lista de todos sus pedidos en memoria (esta información se consulta desde la base de datos cuando es necesario). Esta decisión de diseño optimiza el uso de memoria y evita inconsistencias entre objetos en memoria y datos persistidos.
-
+Un \texttt{Cliente} puede realizar múltiples \texttt{Pedidos}, estableciendo una relación \textbf{uno-a-muchos} (1..*). Esta asociación se implementa mediante \texttt{idUsuario} en \texttt{Pedido}, que funciona como clave foránea referenciando al cliente.
+La relación es \textbf{unidireccional} desde \texttt{Pedido} hacia \texttt{Cliente}: los pedidos necesitan saber quién los realizó, pero un cliente no mantiene lista de sus pedidos en memoria (se consulta desde la base de datos cuando es necesario), optimizando memoria y evitando inconsistencias.
 \subsubsection{Composición entre Pedido y DetallePedido}
-
-Un \texttt{Pedido} se compone de múltiples \texttt{DetallePedido}, donde cada detalle representa un producto específico con su cantidad y precio unitario. Esta es una relación de \textbf{composición fuerte}, representada en UML con un rombo relleno, porque:
-
-\begin{enumerate}
-    \item Los detalles no pueden existir sin un pedido padre
-    \item Si se elimina un pedido, todos sus detalles también deben eliminarse
-    \item El ciclo de vida de los detalles está completamente controlado por el pedido
-\end{enumerate}
-
-La clase \texttt{Pedido} mantiene una lista (\texttt{List<DetallePedido>}) de todos sus detalles, permitiendo gestionar todos los productos del pedido como una unidad cohesiva. Esta relación también facilita el cálculo automático del total del pedido sumando los subtotales de cada detalle.
-
+Un \texttt{Pedido} se compone de múltiples \texttt{DetallePedido}, donde cada detalle representa un producto con su cantidad y precio. Esta es una relación de \textbf{composición fuerte} (rombo relleno en UML) porque los detalles no pueden existir sin un pedido, si se elimina un pedido se eliminan sus detalles, y el ciclo de vida de los detalles está controlado por el pedido.
+\texttt{Pedido} mantiene una lista (\texttt{List<DetallePedido>}) de sus detalles, permitiendo gestionar todos los productos como una unidad y facilitar el cálculo del total del pedido.
 \subsubsection{Asociación entre DetallePedido y Producto}
-
-Cada \texttt{DetallePedido} referencia al \texttt{Producto} que se está ordenando mediante el atributo \texttt{idProducto}. Esta es una \textbf{asociación simple} (no composición ni agregación), ya que:
-
-\begin{itemize}
-    \item El detalle necesita conocer el producto para obtener su información (nombre, precio)
-    \item El detalle no posee ni controla el ciclo de vida del producto
-    \item Los productos existen independientemente de los pedidos que los referencian
-\end{itemize}
-
-Una característica importante de esta relación es que cuando se crea un detalle de pedido, se captura y almacena el \texttt{precioUnitario} del producto en ese momento específico. Esto garantiza que cambios futuros en el precio del producto no afecten pedidos históricos, manteniendo la integridad de los registros comerciales.
+Cada \texttt{DetallePedido} referencia al \texttt{Producto} mediante \texttt{idProducto}. Esta es una \textbf{asociación simple}, ya que el detalle necesita conocer el producto para obtener su información, pero no posee ni controla su ciclo de vida; los productos existen independientemente de los pedidos.
+Cuando se crea un detalle de pedido, se captura y almacena el \texttt{precioUnitario} del producto en ese momento, garantizando que cambios futuros en el precio no afecten pedidos históricos, manteniendo la integridad de los registros.
 
 \subsection{Modelo de Base de Datos}
 
@@ -829,6 +802,7 @@ En conclusión, el proyecto representa una aplicación completa de los principio
 \end{thebibliography}
 
 \end{document}
+
 
 
 
