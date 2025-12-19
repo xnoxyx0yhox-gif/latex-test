@@ -1,10 +1,6 @@
-% !TeX program = pdflatex --shell-escape
-% !TeX TXS-program:pdflatex --shell-escape
-
 \documentclass[12pt,a4paper]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[spanish]{babel}
-\usepackage{pdflscape}
 \usepackage{graphicx}
 \usepackage{geometry}
 \usepackage{setspace}
@@ -14,46 +10,75 @@
 \usepackage{float}
 \usepackage{caption}
 \usepackage{hyperref}
-\usepackage{minted}
 \usepackage{tcolorbox}
-\tcbuselibrary{minted}
-\usepackage{tikz}
+\tcbuselibrary{listings,skins,breakable}
 \usepackage{enumitem}
 \usepackage{booktabs}
 \usepackage{array}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{pifont}
 
 \geometry{left=2.54cm,right=2.54cm,top=2.54cm,bottom=2.54cm}
 \setstretch{1.5}
 \setlength{\parindent}{1.27cm}
 
-% Configuración mejorada para listados de código
+% Configuración de listings para Java
 \definecolor{codebackground}{RGB}{248,248,248}
+\definecolor{codeframe}{RGB}{200,200,200}
 \definecolor{codekeyword}{RGB}{127,0,85}
 \definecolor{codestring}{RGB}{42,0,255}
 \definecolor{codecomment}{RGB}{63,127,95}
-\definecolor{codeframe}{RGB}{200,200,200}
 
-\tcbuselibrary{listings,skins,breakable}
+% Estilo Java para listings
+\lstdefinestyle{javastyle}{
+    language=Java,
+    basicstyle=\footnotesize\ttfamily,
+    backgroundcolor=\color{codebackground},
+    frame=lines,
+    framesep=3mm,
+    rulecolor=\color{codeframe},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    numbersep=6pt,
+    breaklines=true,
+    keywordstyle=\color{blue}\bfseries,
+    commentstyle=\color{green!60!black},
+    stringstyle=\color{red},
+    showstringspaces=false,
+    tabsize=4,
+    captionpos=b,
+    morekeywords={String, int, boolean, double, List, ArrayList, Timestamp},
+    literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+}
 
+% Estilo SQL para listings
+\lstdefinestyle{sqlstyle}{
+    language=SQL,
+    basicstyle=\footnotesize\ttfamily,
+    backgroundcolor=\color{codebackground},
+    frame=lines,
+    framesep=3mm,
+    rulecolor=\color{codeframe},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    numbersep=6pt,
+    breaklines=true,
+    keywordstyle=\color{blue}\bfseries,
+    commentstyle=\color{green!60!black},
+    stringstyle=\color{red},
+    showstringspaces=false,
+    tabsize=4,
+    captionpos=b,
+    morekeywords={SELECT, FROM, WHERE, INSERT, UPDATE, DELETE, CREATE, TABLE, INT, VARCHAR, PRIMARY, KEY, FOREIGN, REFERENCES, NOT, NULL}
+}
+
+% Entorno para código Java
 \newtcblisting{javacode}[2][]{
-    listing engine=minted,
-    minted style=vs,
-    minted language=java,
-    minted options={
-        numbers=left,
-        numbersep=6pt,
-        fontsize=\footnotesize,
-        breaklines=true,
-        linenos=true,
-        baselinestretch=1.3,
-        tabsize=4,
-        frame=lines,
-        framesep=3mm,
-        rulecolor=\color{codeframe}
-    },
+    listing only,
+    listing style=javastyle,
     colback=codebackground,
     colframe=codeframe,
-    listing only,
     left=8mm,
     right=4mm,
     top=4mm,
@@ -65,25 +90,12 @@
     #1
 }
 
+% Entorno para código SQL
 \newtcblisting{sqlcode}[2][]{
-    listing engine=minted,
-    minted style=vs,
-    minted language=sql,
-    minted options={
-        numbers=left,
-        numbersep=6pt,
-        fontsize=\footnotesize,
-        breaklines=true,
-        linenos=true,
-        baselinestretch=1.3,
-        tabsize=4,
-        frame=lines,
-        framesep=3mm,
-        rulecolor=\color{codeframe}
-    },
+    listing only,
+    listing style=sqlstyle,
     colback=codebackground,
     colframe=codeframe,
-    listing only,
     left=8mm,
     right=4mm,
     top=4mm,
@@ -1591,6 +1603,7 @@ En conclusión, el proyecto representa una aplicación completa de los principio
 \end{thebibliography}
 
 \end{document}
+
 
 
 
